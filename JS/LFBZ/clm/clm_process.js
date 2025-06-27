@@ -4,6 +4,17 @@ import { browser } from "k6/browser";
 //import login_to_dashborad from "../login/login_to_dashborad.js";
 import clm_draft from "./clm_draft.js";
 
+function getFormattedTimestamp() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
 export const options = {
     scenarios: {
         ui: {
@@ -36,7 +47,8 @@ export default async function () {
 }
 
 export function handleSummary(data) {
+    const timestamp = getFormattedTimestamp().replace(/:/g, '_');
     return {
-        [`Reuslt/clm_process_summary_${Date.now()}.html`]: htmlReport(data),
+        [`Reuslt/clm_process_summary_${timestamp}.html`]: htmlReport(data),
     };
 }

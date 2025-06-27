@@ -2,6 +2,18 @@ import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporte
 import { browser } from 'k6/browser';
 import login_to_dashborad from "../login/login_to_dashborad.js";
 
+function getFormattedTimestamp() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+
 export const options = {
   scenarios: {
     ui: {
@@ -20,11 +32,12 @@ export const options = {
 
 export default async function () {
   //const page = await browser.newPage();
+  const timestamp = getFormattedTimestamp().replace(/:/g, '_');
 
   try {
     const page = await login_to_dashborad();
     await page.goto('https://business.lawform.io/clm/draft')
-    await page.screenshot({path: `screenshots/screenshot_${Date.now()}.png`});
+    await page.screenshot({path: `screenshots/screenshot_${timestamp}.png`});
     return page;
   }
   finally{
@@ -32,8 +45,9 @@ export default async function () {
   }
 }
 export function handleSummary(data) {
-    return {
-        [`Reuslt/clm_draft_summary_${Date.now()}.html`]: htmlReport(data),
+  const timestamp = getFormattedTimestamp().replace(/:/g, '_');  
+  return {
+        [`Reuslt/clm_draft_summary_${timestamp}.html`]: htmlReport(data),
     };
 }
 
