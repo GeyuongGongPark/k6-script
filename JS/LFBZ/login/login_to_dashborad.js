@@ -33,21 +33,21 @@ export const options = {
 
 export default async function () {
   const page = await browser.newPage();
-  const timestamp = getFormattedTimestamp().replace(/:/g, '_');
+  //const timestamp = getFormattedTimestamp().replace(/:/g, '_');
   const credentials = getCurrentLoginCredentials();
   
   try {
     await page.goto(URLS.LOGIN.HOME);
-    await page.screenshot({ path: `screenshots/screenshot_${timestamp}.png` });
+    await page.screenshot({path: `screenshots/screenshot_${getFormattedTimestamp().replace(/:/g, '_')}.png`});
     await page.goto(URLS.LOGIN.LOGIN);
-    await page.screenshot({ path: `screenshots/screenshot_${timestamp}.png` });
+    await page.screenshot({path: `screenshots/screenshot_${getFormattedTimestamp().replace(/:/g, '_')}.png`});
     await page.waitForSelector(SELECTORS.LOGIN.EMAIL_INPUT);
     await page.type(SELECTORS.LOGIN.EMAIL_INPUT, credentials.EMAIL);
     await page.waitForSelector(SELECTORS.LOGIN.PASSWORD_INPUT);
     await page.type(SELECTORS.LOGIN.PASSWORD_INPUT, credentials.PASSWORD);
     await page.click(SELECTORS.LOGIN.SUBMIT_BUTTON, { nht: 0 });
     await page.goto(URLS.LOGIN.DASHBOARD);
-    await page.screenshot({ path: `screenshots/screenshot_${timestamp}.png` });
+    await page.screenshot({path: `screenshots/screenshot_${getFormattedTimestamp().replace(/:/g, '_')}.png`});
   
     return page;
   }
