@@ -2,6 +2,7 @@ import { check } from "k6";
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import { browser } from "k6/browser";
 import login_to_dashborad from "../login/login_to_dashborad.js";
+import { URLS } from '../url/base.js';
 
 function getFormattedTimestamp() {
     const now = new Date();
@@ -35,7 +36,7 @@ export default async function () {
 
     try {
         const page = await login_to_dashborad();
-        await page.goto('https://business.lawform.io/advice/draft');
+        await page.goto(URLS.ADVICE.DRAFT);
         await page.screenshot({path: `screenshots/screenshots_${timestamp}.png`});
         return page;
     }

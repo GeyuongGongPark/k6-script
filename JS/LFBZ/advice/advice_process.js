@@ -2,6 +2,7 @@ import { check } from "k6";
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import { browser } from "k6/browser";
 import advice_clm from "./advice_clm.js";
+import { URLS } from '../url/base.js';
 
 function getFormattedTimestamp() {
     const now = new Date();
@@ -33,7 +34,7 @@ export default async function () {
     // const page = await browser.newPage();
 
     try {
-        const page = await advice_draft();
+        const page = await advice_clm();
         }
     finally {
         await page.close();

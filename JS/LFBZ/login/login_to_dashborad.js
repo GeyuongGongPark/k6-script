@@ -1,5 +1,7 @@
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import { browser } from 'k6/browser';
+import { URLS } from '../url/base.js';
+import { getCurrentLoginCredentials, SELECTORS } from '../url/config.js';
 
 
 function getFormattedTimestamp() {
@@ -32,17 +34,19 @@ export const options = {
 export default async function () {
   const page = await browser.newPage();
   const timestamp = getFormattedTimestamp().replace(/:/g, '_');
+  const credentials = getCurrentLoginCredentials();
+  
   try {
-    await page.goto('https://business.lawform.io');
+    await page.goto(URLS.LOGIN.HOME);
     await page.screenshot({ path: `screenshots/screenshot_${timestamp}.png` });
-    await page.goto('https://business.lawform.io/login');
+    await page.goto(URLS.LOGIN.LOGIN);
     await page.screenshot({ path: `screenshots/screenshot_${timestamp}.png` });
-    await page.waitForSelector('input[type="email"');
-    await page.type('input[type="email"]', 'ggpark+id20250211162329770_m@amicuslex.net');
-    await page.waitForSelector('input[type="password"');
-    await page.type('input[type="password"]', 'q1w2E#R$');
-    await page.click('button[type="submit"]', { nht: 0 });
-    await page.goto('https://business.lawform.io/dashboard');
+    await page.waitForSelector(SELECTORS.LOGIN.EMAIL_INPUT);
+    await page.type(SELECTORS.LOGIN.EMAIL_INPUT, credentials.EMAIL);
+    await page.waitForSelector(SELECTORS.LOGIN.PASSWORD_INPUT);
+    await page.type(SELECTORS.LOGIN.PASSWORD_INPUT, credentials.PASSWORD);
+    await page.click(SELECTORS.LOGIN.SUBMIT_BUTTON, { nht: 0 });
+    await page.goto(URLS.LOGIN.DASHBOARD);
     await page.screenshot({ path: `screenshots/screenshot_${timestamp}.png` });
   
     return page;
