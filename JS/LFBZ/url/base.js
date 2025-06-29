@@ -24,7 +24,7 @@ export const CLM_URLS = {
     SEARCH: `${BASE_URL}/clm/search`, //통합검색
     REVIEW: `${BASE_URL}/clm/review`, //검토 요청 조회
     COMPLETE: `${BASE_URL}/clm/complete`, //체결 계약서 조회
-    PAUSE: `${BASE_URL}/complete?is_paused=2` //일시 중단 리스트
+    PAUSE: `${BASE_URL}/clm/complete?is_paused=2` //일시 중단 리스트
 };
 
 //SEAL 관련 URL
@@ -42,7 +42,7 @@ export const ADVICE_URLS = {
 
 //Litigation 관련 URL
 export const LITIGATION_URLS = {
-    DRAFT: `${BASE_URL}/litigation/darft`, //송무 등록 
+    DRAFT: `${BASE_URL}/litigation/draft`, //송무 등록 
     PROCESS: `${BASE_URL}/litigation/process`,
     REVIEW: `${BASE_URL}/litigation`, //송무 조회 
     SCHEDULE: `${BASE_URL}/litigation/schedule` //송무 전체 일정
@@ -70,7 +70,12 @@ export const CONTRACT_URLS = {
 //시스템 설정 관련 URL
 export const SETTING_URLS = {
     TEAM: `${BASE_URL}/teams`, //구성원 관리
-    PROFILE: `${BASE_URL}/profile`, //회원정보
+    ACCOUNT: `${BASE_URL}/profile?type=account`, //회원정보_계정 설정
+    NOTIFICATION: `${BASE_URL}/profile?type=notification`, //회원정보_알림/이메일 수신 설정 
+    LOG: `${BASE_URL}/profile?type=log`, //회원정보_로그인 기록
+    FAILEDLOG: `${BASE_URL}/profile?type=failedLog`, //회원정보_로그인 실패 기록
+    FA: `${BASE_URL}/profile?ytpe=twoFA`, //2단계 인증
+    MANAGEMENT: `${BASE_URL}/profile?type=deviceManagement`, //회원정보_로그인 관리 
     SETUP: `${BASE_URL}/setup` //설정
 }
 
