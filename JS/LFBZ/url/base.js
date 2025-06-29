@@ -20,10 +20,17 @@ export const ADVICE_URLS = {
     PROCESS: `${BASE_URL}/advice/process`
 };
 
+//Litigation 관련 URL
+export const LITIGATION_URLS = {
+    DRAFT: `${BASE_URL}/litigation/darft`,
+    PROCESS: `${BASE_URL}/litigation/process`
+};
+
 // 모든 URL을 하나의 객체로 통합
 export const URLS = {
     BASE: BASE_URL,
     LOGIN: LOGIN_URLS,
     CLM: CLM_URLS,
-    ADVICE: ADVICE_URLS
+    ADVICE: ADVICE_URLS,
+    LITIGATION: LITIGATION_URLS
 }; 
