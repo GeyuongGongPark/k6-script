@@ -7,10 +7,6 @@ export const ENVIRONMENTS = {
     alpha: {
         BASE_URL: 'https://alpha.business.lfdev.io',
         NAME: 'alpha'
-    },
-    DEVELOPMENT: {
-        BASE_URL: 'https://dev.business.lfdev.io',
-        NAME: 'development'
     }
 };
 
@@ -24,12 +20,8 @@ export const LOGIN_CREDENTIALS = {
         PASSWORD: 'q1w2E#R$'
     },
     alpha: {
-        EMAIL: 'your_alpha_email@example.com',
-        PASSWORD: 'your_alpha_password'
-    },
-    DEVELOPMENT: {
-        EMAIL: 'your_dev_email@example.com',
-        PASSWORD: 'your_dev_password'
+        EMAIL: 'ggpark+id20250211092023378_m@amicuslex.net',
+        PASSWORD: '1q2w#E$R'
     }
 };
 
